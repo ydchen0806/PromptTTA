@@ -105,10 +105,7 @@ class GradCAM:
             return x, y, z, depth, height, width
 
         return None
-# 我的思路其实是这样的，我的目的是进行test time adaptation，在CREMIA训练好的模型在CREMIB 测试。具体想通过local和global的visual prompt去调整整个网络，
-# 这里我的分割网络是Unet，训练好Unet后，我使用相同结构的Unet当作特征提取器抽取local和global的visual prompt，global是抽取整个输入图像的特征，
-# local是抽取通过上面box得到网络最关注的区域，然后inference的时候固定分割网络的权重，改变这两个特征提取器的权重，将他们学习到的可变矩阵加到CREMIB的输入数据，
-# 实现TTA，怎么实现呢，这个方法有什么可以改进的吗
+
     def __call__(self, input_tensor, channel_idx=None, upsample_size=None):
         # Forward pass
         input_tensor = input_tensor[:1]
